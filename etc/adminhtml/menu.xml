@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Mmsbuilder_Connector::push" 
+		 title="Push Notification" 
+		 module="Mmsbuilder_Pushnotification" 
+		 sortOrder="14"  
+		 resource="Mmsbuilder_Connector::push"
+		 parent="Mmsbuilder_Connector::advanced_connector" 
+		 action="pushnotify"
+		/>
+	</menu>
+</config>

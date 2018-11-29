@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+    <!--Start:PushNotification -->
+        <section id="mmsbuilder_pushnotification" translate="label" type="text" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Push Notification Configuration</label>
+            <tab>magentomobileshop</tab>
+            <resource>Mmsbuilder_Pushnotification::config</resource>
+            <group id="background_notification" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Background Notification</label>
+                <field id="background_notification" translate="select" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Background Notification</label>
+                    <source_model>Mmsbuilder\Pushnotification\Model\Config\Source\Pushnotification</source_model>
+                    <comment>Enable Background Notification</comment>
+                </field>
+            </group>
+            <group id="android_notification" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Android Notification Setting</label>
+                <field id="push_notification_status" translate="select" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Pushnotification</label>
+                   <source_model>Mmsbuilder\Pushnotification\Model\Config\Source\Pushnotification</source_model>
+                    <comment>Enable Bulk Android Pushnotification</comment>
+                </field>
+
+                 <field id="google_api_key" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Api Key</label>
+                    <validate>validate-no-empty</validate>
+                </field>
+            </group>
+
+            <group id="ios_notification" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>IOS Notification Setting</label>
+
+                <field id="ios_push_notification_status" translate="select" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable IOS Pushnotification</label>
+                   <source_model>Mmsbuilder\Pushnotification\Model\Config\Source\Iospushnotification</source_model>
+                    <comment>Enable Bulk IOS Pushnotification</comment>
+                </field>
+
+                 <field id="push_notification_mode" translate="select" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Notification Mode</label>
+                   <source_model>Mmsbuilder\Pushnotification\Model\Config\Source\Iospushnotificationmode</source_model>
+                    <comment>Select Mode</comment>
+                </field>
+
+                 <field id="passphras" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>IOS Passphrase</label>
+                    <validate>validate-no-empty</validate>
+                </field>
+
+                 
+                <field id="upload_pem" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="15" showInDefault="1" showInWebsite="1" >
+                    <label>Pem file for IOS:</label>
+                    <backend_model>Mmsbuilder\Pushnotification\Model\Config\Backend\CustomFileType</backend_model>
+                    <upload_dir>uploads</upload_dir>
+                </field>
+
+
+            </group>
+
+            <group id="user_config" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Manage Notification For Orders</label>
+                <field id="user_config_status" translate="select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Order Notification</label>
+                   <source_model>Mmsbuilder\Pushnotification\Model\Config\Source\Pushnotification</source_model>
+                    <comment>Enable Order Notification</comment>
+                </field>
+
+                <field id="user_config_order_status" translate="label" type="multiselect" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Status</label>
+                    <source_model>Mmsbuilder\Pushnotification\Model\Config\Source\Orderlist</source_model>
+                </field>
+
+
+                <field id="user_config_order_message" translate="label" type="textarea" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message</label>
+                    <validate>validate-no-empty</validate>
+                       <comment>Use {orderid},{status} to add order id and order status in your message.</comment>
+                </field>
+            </group>
+
+
+        </section>
+    <!--End:PushNotification -->
+    </system>
+</config>

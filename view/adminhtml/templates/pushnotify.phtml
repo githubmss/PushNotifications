@@ -1,0 +1,72 @@
+<?php 
+$helper = $this->helper('Mmsbuilder\Pushnotification\Helper\Data');
+?>
+<div style="text-align:center;">
+		<h1>PUSH NOTIFICATION</h1>
+		<form role="form" id="notification-form" action="<?php echo $this->getUrl('/ajax/index', ['_secure' => true])?>">
+		<?php 
+			$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+			$FormKey = $objectManager->get('Magento\Framework\Data\Form\FormKey'); 
+		?>
+		<div>
+			<p id="success" style="display:none;"></p>
+			<p id="error" style="display:none;"></p>
+		</div>
+		<input name="form_key" type="hidden" value="<?php echo $FormKey->getFormKey();?>">
+			 <div class="form-group">
+				    <label id="label" class="type"><h4>Notification Type :</h4></label>
+				  		<select id="notification_type" name="type">
+							<?php if($helper->getAndroidNotificationStatus() && $helper->getIosNotificationStatus()): ?>
+								<option value="0">Send Notification to Both IOS/Android</option>
+							<?php endif;?>
+							<?php if($helper->getAndroidNotificationStatus()): ?>
+								<option value="<?php echo \Mmsbuilder\Pushnotification\Helper\Data::ANDROID_CODE?>">Send Notification to Android Only</option>
+							<?php endif;?>
+							<?php if($helper->getIosNotificationStatus()): ?>
+								<option value="<?php echo \Mmsbuilder\Pushnotification\Helper\Data::IOS_CODE?>">Send Notification to IOS only</option>
+							<?php endif;?>
+						</select>
+
+			  </div>
+			  <div style="margin-top:23px;" class="form-group">
+				    <div><label id="label"><h4>Pushnotification Message:</h4></label></div>
+				  		<div><textarea data-validate="{'required-entry':true}" id="message" cols="50" rows="10" name="message"></textarea></div>
+
+			  </div>
+		  	  <div style="margin-top:23px; padding:18px;">
+		 		 <button onclick="pushnotification()" class="btn btn-default" id="butt" type="button" style="width:162px;height:35px">Send Notification</button>
+			  </div>
+			 <div id="information">
+			 </div>
+		</form>
+</div>
+<script type="text/javascript">
+
+	function pushnotification() {
+		var form = jQuery('#notification-form');
+		if (!jQuery('#message').val()) {
+			alert('Message is required.');
+       		return;
+   		}
+		//form.validation();
+		jQuery.ajax( {
+		  showLoader: true, // enable loader
+    	  context: jQuery('#notification-form'),
+	      type: "POST",
+	      url: form.attr( 'action' ),
+	      data: form.serialize(),
+	      success: function( response ) {
+	      	console.log(response);
+	      	if (response.statusCode!=200) {
+	      		jQuery('#success').html(response.success);
+	      		jQuery('#success').show();
+	      		jQuery('#error').html(response.error);
+	      		jQuery('#error').show();
+	      		alert(response.msg);
+	      	} else {
+	      		alert(response.msg);
+	      	}
+	      }
+	    } );
+	}
+</script>
